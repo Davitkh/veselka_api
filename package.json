@@ -1,23 +1,32 @@
 {
-  "name": "gql",
+  "name": "veselka_api",
   "version": "1.0.0",
-  "description": "",
+  "description": "api for veselka app",
   "main": "index.js",
+  "type": "module",
   "scripts": {
+    "start": "node src/index.js",
     "dev": "nodemon src/index.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@prisma/client": "^4.14.1",
-    "apollo-server": "^2.26.1",
-    "bcryptjs": "^2.4.3",
-    "graphql": "^14.7.0",
-    "jsonwebtoken": "^9.0.0",
-    "nodemon": "^2.0.22"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Davitkh/veselka_api.git"
   },
+  "keywords": [
+    ".js",
+    ".ts"
+  ],
+  "author": "Edgar Hovhannisyan <edocrach32@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Davitkh/veselka_api/issues"
+  },
+  "homepage": "https://github.com/Davitkh/veselka_api#readme",
   "devDependencies": {
-    "prisma": "^4.14.1"
+    "nodemon": "^3.0.1"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2"
   }
 }
