@@ -1,30 +1,10 @@
-const { ApolloServer, PubSub } = require("apollo-server");
-const { PrismaClient } = require("@prisma/client");
-const fs = require("fs");
-const path = require("path");
-const prisma = new PrismaClient();
-const { getUserId } = require("./utils");
-const Query = require("./resolvers/Query");
-const Mutation = require("./resolvers/Mutation");
-const User = require("./resolvers/User");
-const Link = require("./resolvers/Link");
-const Subscription = require("./resolvers/Subscription");
-const Vote = require("./resolvers/Vote");
+import express from 'express';
+import dotenv from 'dotenv';
+dotenv.config();
+import signin from './routes/auth/signin.js';
 
-const resolvers = { Query, Mutation, User, Link, Subscription, Vote };
-const pubsub = new PubSub();
+const app = express();
 
-const server = new ApolloServer({
-  typeDefs: fs.readFileSync(path.join(__dirname, "schema.graphql"), "utf8"),
-  resolvers,
-  context: ({ req }) => {
-    return {
-      ...req,
-      prisma,
-      pubsub,
-      userId: req && req.headers.authorization ? getUserId(req) : null,
-    };
-  },
-});
+app.use('/auth', signin);
 
-server.listen().then(({ url }) => console.log(`Server is running on ${url}`));
+app.listen(4000, () => console.log('server is running!'));
