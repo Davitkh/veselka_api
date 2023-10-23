@@ -28,18 +28,18 @@ router.post('/signin', async (req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
     if (user) {
-      const isSame = await bcrypt.compare(password, user.password);
-      if (isSame) {
-        res.status(201).json({
+      const isSameUser = await bcrypt.compare(password, user.password);
+      if (isSameUser) {
+        return res.status(201).json({
           firstName: user.firstName,
           lastName: user.lastName,
           email: user.email,
         });
       } else {
-        res.status(400).json({ message: 'Password is incorrect' });
+        return res.status(400).json({ message: 'Password is incorrect' });
       }
     } else {
-      res.status(400).json({ message: 'User is not found' });
+      return res.status(400).json({ message: 'User is not found' });
     }
   } catch (err) {
     console.log(err);
