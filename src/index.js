@@ -7,13 +7,13 @@ import loginRouter from './routes/auth.js';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 
-app.use(
-  bodyParser.urlencoded({
-    extended: true,
-  })
-);
 app.use(cors());
 app.use(bodyParser.json());
+app.use(
+  bodyParser.urlencoded({
+    extended: false,
+  })
+);
 
 app.use('/auth', loginRouter);
 
