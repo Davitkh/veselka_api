@@ -8,7 +8,7 @@ router.post('/signup', async (req, res) => {
     const { firstName, lastName, email, password } = req.body;
     const user = await User.findOne({ email });
     if (user) {
-      return res.status(400).json({ message: 'User already exists' });
+      return res.status(400).json({ error: 'User already exists' });
     }
     const hash = await bcrypt.hash(password, 10);
     const newUser = new User({ firstName, lastName, email, password: hash });
@@ -19,7 +19,7 @@ router.post('/signup', async (req, res) => {
       email: newUser.email,
     });
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ error: err.message });
   }
 });
 
@@ -36,10 +36,10 @@ router.post('/signin', async (req, res) => {
           email: user.email,
         });
       } else {
-        return res.status(400).json({ message: 'Password is incorrect' });
+        return res.status(400).json({ error: 'Password is incorrect' });
       }
     } else {
-      return res.status(400).json({ message: 'User is not found' });
+      return res.status(400).json({ error: 'User is not found' });
     }
   } catch (err) {
     console.log(err);
